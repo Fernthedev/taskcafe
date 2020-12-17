@@ -1,8 +1,6 @@
-name: Upstream sync
 on:
-#   schedule:
-#     - cron:  '*/30 * * * *'
-  workflow_dispatch:
+  schedule:
+    - cron:  '*/30 * * * *'
 
 jobs:
   sync_with_upstream:
@@ -16,29 +14,29 @@ jobs:
             target-branch: master
           - branch: fern-custom
             upstream-branch: master
-            target-branch: 'fern-custom'
+            target-branch: fern-custom
     
     runs-on: ubuntu-latest
     name: Sync master with upstream latest
 
     steps:
     # Step 1: run a standard checkout action, provided by github
-    - name: Checkout master ${{ matrix.branch }}
+    - name: Checkout master
       uses: actions/checkout@v2
       with:
         ref: master
         # submodules: 'recursive'     ### possibly needed in your situation
 
     # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
-    - name: Pull upstream changes
+    - name: Pull (Fast-Forward) upstream changes
       id: sync
-      uses: aormsby/Fork-Sync-With-Upstream-action@v2.2
+      uses: aormsby/Fork-Sync-With-Upstream-action@v2.0
       with:
         upstream_repository: JordanKnott/taskcafe
         upstream_branch: ${{ matrix.upstream-branch }}
         target_branch: ${{ matrix.target-branch }}
-        git_pull_args: '--no-edit --allow-unrelated-histories'            # optional arg use, defaults to simple 'pull'
-#        github_token: ${{ secrets.GITHUB_TOKEN }}   # optional, for accessing repos that require authentication
+        git_pull_args: --ff-only                    # optional arg use, defaults to simple 'pull'
+        github_token: ${{ secrets.GITHUB_TOKEN }}   # optional, for accessing repos that require authentication
 
     # Step 3: Display a message if 'sync' step had new commits (simple test)
     - name: Check for new commits
