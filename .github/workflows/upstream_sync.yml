@@ -1,3 +1,4 @@
+name: Upstream sync
 on:
   schedule:
     - cron:  '*/30 * * * *'
