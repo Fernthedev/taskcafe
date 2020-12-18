@@ -7,23 +7,23 @@ on:
 jobs:
   sync_with_upstream:
     
-    strategy:
-      matrix:
-        branch: [master, fern-custom]
-        include:
-          - branch: master
-            upstream-branch: master
-            target-branch: master
-          - branch: fern-custom
-            upstream-branch: master
-            target-branch: fern-custom
+#     strategy:
+#       matrix:
+#         branch: [master, fern-custom]
+#         include:
+#           - branch: master
+#             upstream-branch: master
+#             target-branch: master
+#           - branch: fern-custom
+#             upstream-branch: master
+#             target-branch: fern-custom
     
     runs-on: ubuntu-latest
     name: Sync master with upstream latest
 
     steps:
     # Step 1: run a standard checkout action, provided by github
-    - name: Checkout ${{ matrix.branch }}
+    - name: Checkout master # ${{ matrix.branch }}
       uses: actions/checkout@v2
       with:
         ref: master
