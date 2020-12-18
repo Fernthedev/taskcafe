@@ -26,7 +26,7 @@ jobs:
     - name: Checkout ${{ matrix.branch }}
       uses: actions/checkout@v2
       with:
-        ref: ${{ matrix.branch }}
+        ref: master
         # submodules: 'recursive'     ### possibly needed in your situation
 
     # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
@@ -35,8 +35,8 @@ jobs:
       uses: aormsby/Fork-Sync-With-Upstream-action@v2.1
       with:
         upstream_repository: JordanKnott/taskcafe
-        upstream_branch: ${{ matrix.upstream-branch }}
-        target_branch: ${{ matrix.target-branch }}
+        upstream_branch: master
+        target_branch: master
         git_pull_args: --ff-only                 # optional arg use, defaults to simple 'pull'
         github_token: ${{ secrets.GITHUB_TOKEN }}   # optional, for accessing repos that require authentication
 
