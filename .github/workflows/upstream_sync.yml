@@ -32,12 +32,12 @@ jobs:
     # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
     - name: Pull (Fast-Forward) upstream changes
       id: sync
-      uses: aormsby/Fork-Sync-With-Upstream-action@v2.0
+      uses: aormsby/Fork-Sync-With-Upstream-action@v2.1
       with:
         upstream_repository: JordanKnott/taskcafe
         upstream_branch: ${{ matrix.upstream-branch }}
         target_branch: ${{ matrix.target-branch }}
-        git_pull_args: --ff-only --allow-unrelated-histories                    # optional arg use, defaults to simple 'pull'
+        git_pull_args: --ff-only                 # optional arg use, defaults to simple 'pull'
         github_token: ${{ secrets.GITHUB_TOKEN }}   # optional, for accessing repos that require authentication
 
     # Step 3: Display a message if 'sync' step had new commits (simple test)
