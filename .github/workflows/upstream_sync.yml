@@ -26,7 +26,7 @@ jobs:
     - name: Checkout master ${{ matrix.branch }}
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: ${{ matrix.branch }}
         # submodules: 'recursive'     ### possibly needed in your situation
 
     # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
