@@ -16,7 +16,7 @@ jobs:
             target-branch: master
           - branch: fern-custom
             upstream-branch: master
-            target-branch: fern-custom
+            target-branch: 'fern-custom'
     
     runs-on: ubuntu-latest
     name: Sync master with upstream latest
@@ -32,7 +32,7 @@ jobs:
     # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
     - name: Pull upstream changes
       id: sync
-      uses: aormsby/Fork-Sync-With-Upstream-action@v2.1
+      uses: aormsby/Fork-Sync-With-Upstream-action@v2.2
       with:
         upstream_repository: JordanKnott/taskcafe
         upstream_branch: ${{ matrix.upstream-branch }}
